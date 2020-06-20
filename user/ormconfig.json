@@ -1,0 +1,14 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 3300,
+    "username": "postgres",
+    "password": "katmandu",
+    "database": "microservice-db",
+    "schema": "user",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+       "disc/entity/**/*.js"
+    ]
+ }

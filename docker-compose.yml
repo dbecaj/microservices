@@ -1,0 +1,58 @@
+version: '3'
+services:
+  api-gateway:
+    build: ./api-gateway
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    ports:
+      - '3000:3000'
+    working_dir: /src/api-gateway
+    volumes:
+      - ./api-gateway:/src/api-gateway:cached
+    network_mode: host
+  user:
+    build: ./user
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    ports:
+      - '3001:3001'
+    working_dir: /src/user
+    volumes:
+      - ./user:/src/user:cached
+    network_mode: host
+  book:
+    build: ./book
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - NODE_ENV=development
+      - PORT=3002
+    ports:
+      - '3002:3002'
+    working_dir: /src/book
+    volumes:
+      - ./book:/src/book:cached
+    network_mode: host
+  book-checkout:
+    build: ./book-checkout
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - NODE_ENV=development
+      - PORT=3003
+    ports:
+      - '3003:3003'
+    working_dir: /src/book-checkout
+    volumes:
+      - ./book-checkout:/src/book-checkout:cached
+    network_mode: host
+  microservice-db:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_PASSWORD=katmandu
+    ports:
+      - '3300:3300'
+    command: -p 3300
+    network_mode: host
